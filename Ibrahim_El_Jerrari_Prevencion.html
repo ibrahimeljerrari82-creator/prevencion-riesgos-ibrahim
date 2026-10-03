@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso práctico - Prevención de Riesgos Laborales</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+
+        /* CABECERA */
+        header {
+            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            color: white;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        header .icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        header h1 {
+            font-size: clamp(30px, 5vw, 52px);
+            margin-bottom: 15px;
+        }
+
+        header p {
+            max-width: 800px;
+            margin: auto;
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+
+        /* NAVEGACIÓN */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: white;
+            box-shadow: 0 3px 15px rgba(0,0,0,.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 12px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: bold;
+            padding: 9px 14px;
+            border-radius: 8px;
+            transition: .2s;
+        }
+
+        nav a:hover {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        /* CONTENEDOR */
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px rgba(15, 23, 42, .07);
+        }
+
+        section h2 {
+            color: #0f3d63;
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-left: 5px solid #0284c7;
+            padding-left: 15px;
+        }
+
+        section h3 {
+            color: #075985;
+            margin: 25px 0 10px;
+        }
+
+        /* INTRO */
+        .intro {
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            border: 1px solid #bae6fd;
+        }
+
+        .intro strong {
+            color: #075985;
+        }
+
+        /* CASO */
+        .caso p {
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .destacado {
+            border-left: 4px solid #f59e0b;
+            background: #fffbeb;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        /* PREGUNTAS */
+        .pregunta {
+            margin-bottom: 35px;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .pregunta-titulo {
+            background: #0f3d63;
+            color: white;
+            padding: 18px 22px;
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .respuesta {
+            padding: 22px;
+            background: #fff;
+        }
+
+        .respuesta p {
+            margin-bottom: 13px;
+        }
+
+        .respuesta ul {
+            margin: 10px 0 15px 25px;
+        }
+
+        .respuesta li {
+            margin-bottom: 8px;
+        }
+
+        /* TARJETAS DE RIESGOS */
+        .riesgos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .riesgo {
+            padding: 20px;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .riesgo .emoji {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .riesgo h4 {
+            color: #075985;
+            margin-bottom: 7px;
+        }
+
+        /* TABLA */
+        .tabla-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        th {
+            background: #0f3d63;
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        /* MEDIDAS */
+        .medidas {
+            display: grid;
+            gap: 14px;
+            margin-top: 15px;
+        }
+
+        .medida {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            padding: 16px;
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            border-radius: 8px;
+        }
+
+        .numero {
+            min-width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #16a34a;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        /* LEY */
+        .ley {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+        }
+
+        .ley a {
+            color: #0369a1;
+            font-weight: bold;
+        }
+
+        /* BOTÓN */
+        .volver {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #0284c7;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.2);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* MÓVIL */
+        @media (max-width: 700px) {
+            header {
+                padding: 45px 18px;
+            }
+
+            section {
+                padding: 22px;
+            }
+
+            section h2 {
+                font-size: 23px;
+            }
+
+            nav a {
+                font-size: 13px;
+                padding: 7px 9px;
+            }
+
+            .pregunta-titulo {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body id="inicio">
+
+    <!-- CABECERA -->
+    <header>
+        <div class="icon">🦺</div>
+        <h1>Prevención de Riesgos Laborales</h1>
+        <p>
+            Análisis del caso práctico de Javier y Alberto en un taller
+            de reparación de automóviles.
+        </p>
+    </header>
+
+    <!-- MENÚ -->
+    <nav>
+        <ul>
+            <li><a href="#caso">Caso práctico</a></li>
+            <li><a href="#preguntas">Preguntas</a></li>
+            <li><a href="#accidente">Accidente</a></li>
+            <li><a href="#medidas">Medidas</a></li>
+            <li><a href="#ley">LPRL</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <!-- INTRODUCCIÓN -->
+        <section class="intro">
+            <h2>📚 Actividad</h2>
+            <p>
+                <strong>Objetivo:</strong> analizar la situación laboral de Javier,
+                identificar los riesgos existentes en el taller y proponer medidas
+                preventivas para evitar nuevos accidentes.
+            </p>
+        </section>
+
+        <!-- CASO -->
+        <section id="caso" class="caso">
+            <h2>📖 Situación de partida</h2>
+
+            <p>
+                Javier comienza, con mucha ilusión, su nuevo trabajo en una empresa
+                de reparación de automóviles. Para acceder al taller tiene que
+                atravesar un oscuro pasillo y bajar un largo tramo de escaleras
+                empinadas; para su sorpresa, no hay barandilla, por lo que desciende
+                despacito y con mucho cuidado.
+            </p>
+
+            <p>
+                Cuando entra al taller, le llama la atención el calor y el ruido:
+                hay varios coches en marcha, la cabina de pintura está funcionando
+                y los trabajadores gritan entre ellos para entenderse.
+            </p>
+
+            <p>
+                Su jefe le llama por señas y, una vez hechas las presentaciones,
+                le muestra dónde se encuentran todas las herramientas y le advierte
+                que tenga cuidado, pues algunas son cortantes y punzantes.
+            </p>
+
+            <p>
+                También le enseña la cabina de pintura y le proporciona una
+                mascarilla, que le protegerá de las sustancias químicas tóxicas
+                que desprende la máquina. El jefe le advierte que no es el único
+                producto tóxico que se va a encontrar en el taller.
+            </p>
+
+            <div class="destacado">
+                ⚠️ <strong>Problema:</strong> Javier recibe algunas indicaciones,
+                pero no parece recibir una formación completa sobre todos los
+                riesgos presentes en su puesto de trabajo.
+            </div>
+
+            <p>
+                Tres meses después, Javier está muy contento con su trabajo y con
+                las habilidades que está desarrollando, pero también ha descubierto
+                otros factores dañinos para la salud: el ritmo de trabajo es muy
+                elevado, recibe muchos encargos, no se los transmiten por escrito
+                ni de forma adecuada y está tan saturado que no puede descansar
+                ni un minuto durante toda la jornada de trabajo.
+            </p>
+
+            <p>
+                Esto provoca que su atención disminuya a lo largo del día.
+                En una ocasión, después de estar soldando, estaba tan cansado
+                que no vio una herramienta que un trabajador había dejado en el
+                suelo; tropezó con ella y se dio de bruces contra la bancada,
+                rompiéndose el tabique nasal.
+            </p>
+
+            <p>
+                Alberto, un compañero con el que ha entablado una buena amistad,
+                al verle sangrar tanto, se asustó y dejó caer el martillo que tenía
+                entre las manos, con tan mala fortuna que le dio en un pie y se
+                rompió un dedo.
+            </p>
+        </section>
+
+        <!-- PREGUNTAS -->
+        <section id="preguntas">
+            <h2>📝 Estudio del caso</h2>
+
+            <!-- PREGUNTA 1 -->
+            <div class="pregunta">
+                <div class="pregunta-titulo">
+                    1. ¿Qué riesgos corre Javier en su nuevo trabajo?
+                </div>
+
+                <div class="respuesta">
+                    <p>
+                        Javier está expuesto a diferentes tipos de riesgos laborales,
+                        tanto de seguridad como físicos, químicos y psicosociales.
+                    </p>
+
+                    <div class="riesgos">
+
+                        <div class="riesgo">
+                            <div class="emoji">⚠️</div>
+                            <h4>Caídas</h4>
+                            <p>
+                                Existe riesgo de caída por las escaleras empinadas
+                                y sin barandilla, además de obstáculos en el suelo.
+                            </p>
+                        </div>
+
+                        <div class="riesgo">
+                            <div class="emoji">🔊</div>
+                            <h4>Ruido</h4>
+                            <p>
+                                Los vehículos, máquinas y trabajadores generan un
+                                nivel de ruido elevado.
+                            </p>
+                        </div>
+
+                        <div class="riesgo">
+                            <div class="emoji">🔥</div>
+                            <h4>Calor</h4>
+                            <p>
+                                El taller presenta temperaturas elevadas que pueden
+                                provocar fatiga y malestar.
+                            </p>
+                        </div>
+
+                        <div class="riesgo">
+                            <div class="emoji">🧪</div>
+                            <h4>Productos químicos</h4>
+                            <p>
+                                Está expuesto a sustancias tóxicas utilizadas en
+                                trabajos de pintura y reparación.
+                            </p>
+                        </div>
+
+                        <div class="riesgo">
+                            <div class="emoji">🔧</div>
+                            <h4>Herramientas</h4>
+                            <p>
+                                Las herramientas cortantes, punzantes y pesadas
+                                pueden producir heridas y golpes.
+                            </p>
+                        </div>
+
+                        <div class="riesgo">
+                            <div class="emoji">😓</div>
+                            <h4>Fatiga</h4>
+                            <p>
+                                El elevado ritmo de trabajo y la falta de descansos
+                                disminuyen su atención.
+                            </p>
+                        </div>
+
+                        <div class="riesgo">
+                            <div class="emoji">🧠</div>
+                            <h4>Riesgos psicosociales</h4>
+                            <p>
+                                Sobrecarga de trabajo, mala comunicación y presión
+                                laboral.
+                            </p>
+                        </div>
+
+                        <div class="riesgo">
+                            <div class="emoji">💥</div>
+                            <h4>Accidentes</h4>
+                            <p>
+                                Puede sufrir golpes, caídas, cortes, quemaduras
+                                o lesiones por objetos.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PREGUNTA 2 -->
+            <div class="pregunta">
+                <div class="pregunta-titulo">
+                    2. ¿Ha recibido Javier suficiente información y formación?
+                </div>
+
+                <div class="respuesta">
+                    <p>
+                        <strong>No.</strong> Javier no ha recibido información y
+                        formación suficiente antes de comenzar a trabajar.
+                    </p>
+
+                    <p>
+                        Aunque su jefe le enseñó las herramientas y le proporcionó
+                        una mascarilla para trabajar en la cabina de pintura,
+                        esto no es suficiente para garantizar una adecuada
+                        prevención de riesgos laborales.
+                    </p>
+
+                    <p>
+                        Debería haber recibido información y formación sobre:
+                    </p>
+
+                    <ul>
+                        <li>Los riesgos específicos de su puesto.</li>
+                        <li>El uso correcto de las herramientas.</li>
+                        <li>Los productos químicos utilizados en el taller.</li>
+                        <li>Los equipos de protección individual.</li>
+                        <li>Los riesgos derivados del ruido y del calor.</li>
+                        <li>Los procedimientos de emergencia.</li>
+                        <li>La correcta manipulación y almacenamiento de herramientas.</li>
+                        <li>La organización del trabajo y los descansos.</li>
+                    </ul>
+
+                    <p>
+                        Además, la información debe ser clara, suficiente y adecuada
+                        a las funciones que va a desempeñar el trabajador.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PREGUNTA 3 -->
+            <div class="pregunta">
+                <div class="pregunta-titulo">
+                    3. ¿Por qué se ha producido el accidente de Javier y su compañero?
+                </div>
+
+                <div class="respuesta">
+                    <p>
+                        El accidente se produce por la combinación de
+                        <strong>condiciones peligrosas y actos inseguros</strong>,
+                        además de factores relacionados con la organización del trabajo.
+                    </p>
+
+                    <h3>En el caso de Javier:</h3>
+
+                    <ul>
+                        <li>Existía una herramienta abandonada en el suelo.</li>
+                        <li>El lugar de trabajo no estaba correctamente ordenado.</li>
+                        <li>Javier estaba cansado después de realizar trabajos de soldadura.</li>
+                        <li>El ritmo de trabajo era excesivo.</li>
+                        <li>No tenía suficientes descansos.</li>
+                        <li>Su atención había disminuido por la fatiga.</li>
+                    </ul>
+
+                    <p>
+                        Como consecuencia, Javier no vio la herramienta, tropezó
+                        con ella y cayó contra la bancada, sufriendo una fractura
+                        del tabique nasal.
+                    </p>
+
+                    <h3>En el caso de Alberto:</h3>
+
+                    <p>
+                        Alberto reaccionó al ver a Javier herido y, debido al susto,
+                        dejó caer el martillo que llevaba en las manos. El martillo
+                        cayó sobre su pie y le produjo la fractura de un dedo.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PREGUNTA 4 -->
+            <div class="pregunta">
+                <div class="pregunta-titulo">
+                    4. ¿A quién tiene que comunicar la empresa el accidente?
+                </div>
+
+                <div class="respuesta">
+                    <p>
+                        El accidente debe ser comunicado y gestionado siguiendo
+                        los procedimientos establecidos por la empresa y la
+                        normativa de prevención de riesgos laborales.
+                    </p>
+
+                    <p>
+                        La empresa debe registrar e investigar el accidente y,
+                        cuando corresponda, realizar las comunicaciones oficiales
+                        exigidas a la autoridad laboral.
+                    </p>
+
+                    <p>
+                        Además, el accidente debe ponerse en conocimiento de las
+                        personas responsables de la prevención dentro de la empresa
+                        y, cuando proceda, de los representantes de los trabajadores
+                        y de los servicios de prevención.
+                    </p>
+
+                    <div class="destacado">
+                        📌 <strong>Importante:</strong> La comunicación no debe
+                        limitarse a informar de la lesión. También es necesario
+                        investigar las causas para evitar que vuelva a ocurrir.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PREGUNTA 5 -->
+            <div class="pregunta" id="accidente">
+                <div class="pregunta-titulo">
+                    5. Investigación del accidente
+                </div>
+
+                <div class="respuesta">
+
+                    <h3>📍 Datos del accidente</h3>
+
+                    <div class="tabla-container">
+                        <table>
+                            <tr>
+                                <th>Dato</th>
+                                <th>Información</th>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Lugar</strong></td>
+                                <td>
+                                    Taller 1, junto al lugar destinado a soldar.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Fecha y hora</strong></td>
+                                <td>
+                                    Viernes 13 de noviembre, a las 18:00 horas.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Testigos</strong></td>
+                                <td>
+                                    Dos trabajadores.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Javier</strong></td>
+                                <td>
+                                    Técnico en carrocería con tres meses de experiencia.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Alberto</strong></td>
+                                <td>
+                                    Técnico en electromecánica de vehículos con un año
+                                    de experiencia.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3>🩹 ¿Qué lesiones han sufrido?</h3>
+
+                    <p>
+                        <strong>Javier:</strong> sufrió un golpe contra la bancada
+                        y se rompió el tabique nasal.
+                    </p>
+
+                    <p>
+                        <strong>Alberto:</strong> recibió el impacto de un martillo
+                        en el pie y sufrió la fractura de un dedo.
+                    </p>
+
+                    <h3>🏥 ¿Es necesaria la baja médica?</h3>
+
+                    <p>
+                        La necesidad de baja médica debe determinarla un profesional
+                        sanitario en función de la gravedad de las lesiones y de la
+                        capacidad de cada trabajador para realizar su trabajo.
+                    </p>
+
+                    <p>
+                        En ambos casos, las lesiones deben ser valoradas médicamente.
+                        Si las lesiones impiden realizar las funciones habituales,
+                        será necesaria la correspondiente baja médica.
+                    </p>
+
+                    <h3>⚠️ Condiciones peligrosas y actos inseguros</h3>
+
+                    <div class="tabla-container">
+                        <table>
+                            <tr>
+                                <th>Condiciones peligrosas</th>
+                                <th>Actos o factores inseguros</th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Herramienta abandonada en el suelo.
+                                </td>
+                                <td>
+                                    No retirar ni colocar correctamente la herramienta.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Falta de orden y limpieza en la zona de trabajo.
+                                </td>
+                                <td>
+                                    Dejar una herramienta en una zona de paso.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Ritmo de trabajo elevado.
+                                </td>
+                                <td>
+                                    Trabajar con fatiga y disminución de la atención.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Falta de descansos suficientes.
+                                </td>
+                                <td>
+                                    Continuar trabajando a pesar del cansancio.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Organización deficiente del trabajo.
+                                </td>
+                                <td>
+                                    Mala comunicación de las tareas y encargos.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3 id="medidas">🛡️ Medidas para evitar que vuelva a ocurrir</h3>
+
+                    <div class="medidas">
+
+                        <div class="medida">
+                            <div class="numero">1</div>
+                            <div>
+                                <strong>Mantener el orden y la limpieza.</strong>
+                                <p>
+                                    Las herramientas deben guardarse después de su uso
+                                    y nunca dejarse en zonas de paso.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="medida">
+                            <div class="numero">2</div>
+                            <div>
+                                <strong>Mejorar la organización del trabajo.</strong>
+                                <p>
+                                    Los encargos deben comunicarse de forma clara,
+                                    ordenada y adecuada.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="medida">
+                            <div class="numero">3</div>
+                            <div>
+                                <strong>Establecer descansos adecuados.</strong>
+                                <p>
+                                    Deben evitarse jornadas que provoquen una fatiga
+                                    excesiva y una disminución de la atención.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="medida">
+                            <div class="numero">4</div>
+                            <div>
+                                <strong>Formar e informar a los trabajadores.</strong>
+                                <p>
+                                    Javier y el resto de trabajadores deben conocer
+                                    los riesgos y las medidas preventivas de su puesto.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="medida">
+                            <div class="numero">5</div>
+                            <div>
+                                <strong>Utilizar correctamente los EPI.</strong>
+                                <p>
+                                    Se deben proporcionar y utilizar los equipos de
+                                    protección adecuados para cada tarea.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="medida">
+                            <div class="numero">6</div>
+                            <div>
+                                <strong>Revisar las instalaciones.</strong>
+                                <p>
+                                    Deben corregirse peligros como escaleras sin
+                                    barandilla, iluminación insuficiente o zonas
+                                    de paso inseguras.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="medida">
+                            <div class="numero">7</div>
+                            <div>
+                                <strong>Investigar los accidentes.</strong>
+                                <p>
+                                    La empresa debe analizar las causas y aplicar
+                                    medidas correctoras para evitar que se repitan.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- CONCLUSIÓN -->
+        <section>
+            <h2>✅ Conclusión</h2>
+
+            <p>
+                El caso de Javier demuestra que los accidentes laborales no suelen
+                producirse por una única causa. En este caso intervienen problemas
+                de orden y limpieza, falta de formación e información, exceso de
+                trabajo, ausencia de descansos y una organización preventiva
+                insuficiente.
+            </p>
+
+            <p style="margin-top:15px;">
+                Para evitar accidentes es necesario identificar previamente los
+                riesgos, formar adecuadamente a los trabajadores, mantener el lugar
+                de trabajo en buenas condiciones y establecer medidas preventivas
+                eficaces.
+            </p>
+        </section>
+
+        <!-- LEY -->
+        <section id="ley" class="ley">
+            <h2>⚖️ Ley de Prevención de Riesgos Laborales</h2>
+
+            <p>
+                La prevención de riesgos laborales en España está regulada,
+                entre otras normas, por la
+                <strong>Ley 31/1995, de 8 de noviembre, de Prevención de
+                Riesgos Laborales (LPRL)</strong>.
+            </p>
+
+            <p style="margin-top:15px;">
+                Para consultar información y normativa relacionada con la
+                prevención de riesgos laborales, se puede acudir al
+                Instituto Nacional de Seguridad y Salud en el Trabajo (INSST).
+            </p>
+
+            <p style="margin-top:15px;">
+                🌐 <a href="https://www.insst.es/" target="_blank">
+                    Instituto Nacional de Seguridad y Salud en el Trabajo
+                </a>
+            </p>
+        </section>
+
+    </main>
+
+    <!-- BOTÓN VOLVER ARRIBA -->
+    <a href="#inicio" class="volver" title="Volver arriba">↑</a>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>Prevención de Riesgos Laborales</strong></p>
+        <p>Actividad: Análisis de un caso práctico en un taller de automóviles.</p>
+    </footer>
+
+</body>
+</html>
